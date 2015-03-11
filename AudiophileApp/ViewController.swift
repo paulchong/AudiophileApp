@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var eventTableView: UITableView!
     
@@ -20,6 +20,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // define number of sections
     var sections = [String]()
+    
+    // menu pan code
+    var panGestureRecognizer: UIPanGestureRecognizer!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +37,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         rockDescriptions = ["Awesome", "Funky", "Mellow", "Psychedelic", "Solo"]
         edmEvents = ["Calvin Harris", "Armin Van Buuren", "Tiesto", "Skrillex"]
         edmDescriptions = ["Awesome", "Cool", "Mellow", "Rager"]
+     
+        // menu pan code
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "didPanMenu:")
+        panGestureRecognizer.delegate = self
+
         
     }
 
@@ -75,6 +84,51 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
         }
     }
+
+    @IBAction func didPanMenu(sender: UIPanGestureRecognizer) {
+        var location = sender.locationInView(view)
+        var translation = sender.translationInView(view)
+        var velocity = sender.velocityInView(view)
+        
+        println("pan working")
+        
+//        if (sender.state == UIGestureRecognizerState.Began){
+//            trayStartingYPanBegan = tray.frame.origin.y
+//        } else if (sender.state == UIGestureRecognizerState.Changed){
+//            finalTrayPositionY = trayStartingYPanBegan + translation.y
+//            if (finalTrayPositionY < trayStartingY){
+//                finalTrayPositionY = trayStartingYPanBegan + translation.y/10
+//            }
+//            tray.frame.origin.y = finalTrayPositionY
+//        } else if sender.state == UIGestureRecognizerState.Ended {
+//            if (velocity.y > 0){
+//                finalTrayPositionY = 530
+//                trayRotation = CGFloat(-180.0 * M_PI/180)
+//            } else {
+//                finalTrayPositionY = trayStartingY
+//                trayRotation = CGFloat(0 * M_PI/180)
+//            }
+//            UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 30, options: nil, animations: { () -> Void in
+//                self.tray.frame.origin.y = self.finalTrayPositionY
+//                self.trayArrow.transform = CGAffineTransformMakeRotation(self.trayRotation)
+//                }, completion: nil)
+//            
+//        }
+        
+    }
+    
+    
+//    func didPanMenu(sender: UIPanGestureRecognizer) {
+//        var location = sender.locationInView(view)
+//        var translation = sender.translationInView(view)
+//        if (sender.state == UIGestureRecognizerState.Began){
+//            nonTraySmileyCenter = sender.view!.center
+//        } else if (sender.state == UIGestureRecognizerState.Changed){
+//            sender.view!.center = CGPoint(x: nonTraySmileyCenter.x + translation.x, y: nonTraySmileyCenter.y + translation.y)
+//        } else if sender.state == UIGestureRecognizerState.Ended {
+//            
+//        }
+//    }
 
 }
 
