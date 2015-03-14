@@ -92,6 +92,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         println("pan working")
         
+        
+        
 //        if (sender.state == UIGestureRecognizerState.Began){
 //            trayStartingYPanBegan = tray.frame.origin.y
 //        } else if (sender.state == UIGestureRecognizerState.Changed){
