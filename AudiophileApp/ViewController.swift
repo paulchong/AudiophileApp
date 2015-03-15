@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import MCSwipeTableViewCell
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
 
+    @IBOutlet var homeView: UIView!
     @IBOutlet weak var eventTableView: UITableView!
     
     // creating arrays for events and descriptions
@@ -20,6 +22,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // define number of sections
     var sections = [String]()
+    
+    // menu pan code
+    var panGestureRecognizer: UIPanGestureRecognizer!
+    var finalPositionX: CGFloat!
+    var homeViewStartingXPanBegan: CGFloat!
+    var homeViewStartingX: CGFloat!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +42,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         rockDescriptions = ["Awesome", "Funky", "Mellow", "Psychedelic", "Solo"]
         edmEvents = ["Calvin Harris", "Armin Van Buuren", "Tiesto", "Skrillex"]
         edmDescriptions = ["Awesome", "Cool", "Mellow", "Rager"]
+     
+        // menu pan code
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "didPanMenu:")
+        panGestureRecognizer.delegate = self
+        homeViewStartingX = homeView.frame.origin.x
+
         
     }
 
@@ -62,18 +77,65 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            var cell = tableView.dequeueReusableCellWithIdentifier("eventCellId") as EventCell
-            cell.eventTitle.text = edmEvents[indexPath.row]
-            cell.eventDescription.text = edmDescriptions[indexPath.row]
-            return cell
-        } else {
-        
-        var cell = tableView.dequeueReusableCellWithIdentifier("eventCellId") as EventCell
-        cell.eventTitle.text = rockEvents[indexPath.row]
-        cell.eventDescription.text = rockDescriptions[indexPath.row]
-        return cell
+
+        var cell = tableView.dequeueReusableCellWithIdentifier("swipeycell") as MCSwipeTableViewCell?
+        if cell == nil {
+            cell = MCSwipeTableViewCell()
         }
+        
+        cell!.textLabel?.text = "Testing"
+        
+        cell!.setSwipeGestureWithView(UIView(), color: UIColor.greenColor(), mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State1, completionBlock: { cell, state, mode in
+                println("Blah")
+        })
+        
+        cell!.setSwipeGestureWithView(UIView(), color: UIColor.blueColor(), mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State3, completionBlock: { cell, state, mode in
+                println("upon completion right to left")
+        })
+        
+        if indexPath.section == 0 {
+            cell!.textLabel?.text = edmEvents[indexPath.row]
+            cell!.detailTextLabel?.text = edmDescriptions[indexPath.row]
+        } else {
+            cell!.textLabel?.text = rockEvents[indexPath.row]
+            cell!.detailTextLabel?.text = rockDescriptions[indexPath.row]
+        }
+        
+        
+        return cell!
+
+    }
+
+    @IBAction func didPanMenu(sender: UIPanGestureRecognizer) {
+        var location = sender.locationInView(view)
+        var translation = sender.translationInView(view)
+        var velocity = sender.velocityInView(view)
+        
+        println("pan working")
+        
+        
+        if (sender.state == UIGestureRecognizerState.Began) {
+            homeViewStartingXPanBegan = homeView.frame.origin.x
+        } else if (sender.state == UIGestureRecognizerState.Changed) {
+            finalPositionX = homeViewStartingXPanBegan + translation.x
+            if (finalPositionX < homeViewStartingX){
+                finalPositionX = homeViewStartingXPanBegan + translation.x/2
+            }
+            homeView.frame.origin.x = finalPositionX
+        } else if (sender.state == UIGestureRecognizerState.Ended) {
+            if (velocity.x > 0){
+                finalPositionX = 530
+            } else {
+                finalPositionX = homeViewStartingX
+            }
+            UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 30, options: nil, animations: { () -> Void in
+                self.homeView.frame.origin.x = self.finalPositionX
+                }, completion: nil)
+            
+            
+            
+        }
+        
     }
 
 }
