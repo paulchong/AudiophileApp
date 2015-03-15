@@ -11,6 +11,7 @@ import MCSwipeTableViewCell
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
 
+    @IBOutlet var homeView: UIView!
     @IBOutlet weak var eventTableView: UITableView!
     
     // creating arrays for events and descriptions
@@ -24,6 +25,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // menu pan code
     var panGestureRecognizer: UIPanGestureRecognizer!
+    var finalPositionX: CGFloat!
+    var homeViewStartingXPanBegan: CGFloat!
+    var homeViewStartingX: CGFloat!
 
     
     override func viewDidLoad() {
@@ -42,6 +46,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // menu pan code
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "didPanMenu:")
         panGestureRecognizer.delegate = self
+        homeViewStartingX = homeView.frame.origin.x
 
         
     }
@@ -109,44 +114,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         println("pan working")
         
         
-        
-//        if (sender.state == UIGestureRecognizerState.Began){
-//            trayStartingYPanBegan = tray.frame.origin.y
-//        } else if (sender.state == UIGestureRecognizerState.Changed){
-//            finalTrayPositionY = trayStartingYPanBegan + translation.y
-//            if (finalTrayPositionY < trayStartingY){
-//                finalTrayPositionY = trayStartingYPanBegan + translation.y/10
-//            }
-//            tray.frame.origin.y = finalTrayPositionY
-//        } else if sender.state == UIGestureRecognizerState.Ended {
-//            if (velocity.y > 0){
-//                finalTrayPositionY = 530
-//                trayRotation = CGFloat(-180.0 * M_PI/180)
-//            } else {
-//                finalTrayPositionY = trayStartingY
-//                trayRotation = CGFloat(0 * M_PI/180)
-//            }
-//            UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 30, options: nil, animations: { () -> Void in
-//                self.tray.frame.origin.y = self.finalTrayPositionY
-//                self.trayArrow.transform = CGAffineTransformMakeRotation(self.trayRotation)
-//                }, completion: nil)
-//            
-//        }
+        if (sender.state == UIGestureRecognizerState.Began) {
+            homeViewStartingXPanBegan = homeView.frame.origin.x
+        } else if (sender.state == UIGestureRecognizerState.Changed) {
+            finalPositionX = homeViewStartingXPanBegan + translation.x
+            if (finalPositionX < homeViewStartingX){
+                finalPositionX = homeViewStartingXPanBegan + translation.x/2
+            }
+            homeView.frame.origin.x = finalPositionX
+        } else if (sender.state == UIGestureRecognizerState.Ended) {
+            if (velocity.x > 0){
+                finalPositionX = 530
+            } else {
+                finalPositionX = homeViewStartingX
+            }
+            UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 30, options: nil, animations: { () -> Void in
+                self.homeView.frame.origin.x = self.finalPositionX
+                }, completion: nil)
+            
+            
+            
+        }
         
     }
-    
-    
-//    func didPanMenu(sender: UIPanGestureRecognizer) {
-//        var location = sender.locationInView(view)
-//        var translation = sender.translationInView(view)
-//        if (sender.state == UIGestureRecognizerState.Began){
-//            nonTraySmileyCenter = sender.view!.center
-//        } else if (sender.state == UIGestureRecognizerState.Changed){
-//            sender.view!.center = CGPoint(x: nonTraySmileyCenter.x + translation.x, y: nonTraySmileyCenter.y + translation.y)
-//        } else if sender.state == UIGestureRecognizerState.Ended {
-//            
-//        }
-//    }
 
 }
 

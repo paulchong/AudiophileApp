@@ -65,6 +65,7 @@
                     </view>
                     <connections>
                         <outlet property="eventTableView" destination="02L-CG-Kci" id="cg4-ok-1ae"/>
+                        <outlet property="homeView" destination="kh9-bI-dsS" id="Dt6-E0-fum"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
