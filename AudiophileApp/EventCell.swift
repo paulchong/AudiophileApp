@@ -17,12 +17,17 @@ class EventCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
+            // Initialization code
+        }
 
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        swiperView?.frame = self.contentView.bounds
+//    }
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 

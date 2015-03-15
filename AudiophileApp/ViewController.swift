@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MCSwipeTableViewCell
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
 
@@ -71,18 +72,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            var cell = tableView.dequeueReusableCellWithIdentifier("eventCellId") as EventCell
-            cell.eventTitle.text = edmEvents[indexPath.row]
-            cell.eventDescription.text = edmDescriptions[indexPath.row]
-            return cell
-        } else {
-        
-        var cell = tableView.dequeueReusableCellWithIdentifier("eventCellId") as EventCell
-        cell.eventTitle.text = rockEvents[indexPath.row]
-        cell.eventDescription.text = rockDescriptions[indexPath.row]
-        return cell
+
+        var cell = tableView.dequeueReusableCellWithIdentifier("swipeycell") as MCSwipeTableViewCell?
+        if cell == nil {
+            cell = MCSwipeTableViewCell()
         }
+        
+        cell!.textLabel?.text = "Testing"
+        
+        cell!.setSwipeGestureWithView(UIView(), color: UIColor.greenColor(), mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State1, completionBlock: { cell, state, mode in
+                println("Blah")
+        })
+        
+        cell!.setSwipeGestureWithView(UIView(), color: UIColor.blueColor(), mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State3, completionBlock: { cell, state, mode in
+                println("upon completion right to left")
+        })
+        
+        if indexPath.section == 0 {
+            cell!.textLabel?.text = edmEvents[indexPath.row]
+            cell!.detailTextLabel?.text = edmDescriptions[indexPath.row]
+        } else {
+            cell!.textLabel?.text = rockEvents[indexPath.row]
+            cell!.detailTextLabel?.text = rockDescriptions[indexPath.row]
+        }
+        
+        
+        return cell!
+
     }
 
     @IBAction func didPanMenu(sender: UIPanGestureRecognizer) {
