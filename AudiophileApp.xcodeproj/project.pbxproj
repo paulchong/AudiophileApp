@@ -15,6 +15,8 @@
 		8832A6921AAF4A7500B69AA0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8832A6901AAF4A7500B69AA0 /* LaunchScreen.xib */; };
 		8832A69E1AAF4A7500B69AA0 /* AudiophileAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8832A69D1AAF4A7500B69AA0 /* AudiophileAppTests.swift */; };
 		8832A6A81AAF4BC800B69AA0 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8832A6A71AAF4BC800B69AA0 /* EventCell.swift */; };
+		8832A76E1AB5377C00B69AA0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8832A76D1AB5377C00B69AA0 /* DetailViewController.swift */; };
+		8832A7701AB539B400B69AA0 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8832A76F1AB539B400B69AA0 /* FilterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,8 @@
 		8832A69C1AAF4A7500B69AA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8832A69D1AAF4A7500B69AA0 /* AudiophileAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudiophileAppTests.swift; sourceTree = "<group>"; };
 		8832A6A71AAF4BC800B69AA0 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		8832A76D1AB5377C00B69AA0 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		8832A76F1AB539B400B69AA0 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		FEDB27C730DE48C6C54EE5F0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +103,8 @@
 				8832A6A71AAF4BC800B69AA0 /* EventCell.swift */,
 				8832A6891AAF4A7500B69AA0 /* ViewController.swift */,
 				8832A68B1AAF4A7500B69AA0 /* Main.storyboard */,
+				8832A76F1AB539B400B69AA0 /* FilterViewController.swift */,
+				8832A76D1AB5377C00B69AA0 /* DetailViewController.swift */,
 				8832A68E1AAF4A7500B69AA0 /* Images.xcassets */,
 				8832A6901AAF4A7500B69AA0 /* LaunchScreen.xib */,
 				8832A6851AAF4A7500B69AA0 /* Supporting Files */,
@@ -293,6 +299,8 @@
 				8832A68A1AAF4A7500B69AA0 /* ViewController.swift in Sources */,
 				8832A6A81AAF4BC800B69AA0 /* EventCell.swift in Sources */,
 				8832A6881AAF4A7500B69AA0 /* AppDelegate.swift in Sources */,
+				8832A76E1AB5377C00B69AA0 /* DetailViewController.swift in Sources */,
+				8832A7701AB539B400B69AA0 /* FilterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,6 +4,8 @@
 //
 //  Created by Paul Chong on 3/10/15.
 //  Copyright (c) 2015 Paul Chong. All rights reserved.
+
+//  BACK:  create container for filter view - make bottom slightly opaque
 //
 
 import UIKit
@@ -11,7 +13,7 @@ import MCSwipeTableViewCell
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
 
-    @IBOutlet var homeView: UIView!
+    @IBOutlet weak var homeView: UIView!
     @IBOutlet weak var eventTableView: UITableView!
     
     // creating arrays for events and descriptions
@@ -83,14 +85,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell = MCSwipeTableViewCell()
         }
         
-        cell!.textLabel?.text = "Testing"
-        
-        cell!.setSwipeGestureWithView(UIView(), color: UIColor.greenColor(), mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State1, completionBlock: { cell, state, mode in
-                println("Blah")
+        cell!.setSwipeGestureWithView(UIView(), color: UIColor.greenColor(), mode: MCSwipeTableViewCellMode.Exit, state: MCSwipeTableViewCellState.State1, completionBlock: { cell, state, mode in
+            self.performSegueWithIdentifier("detailSegue", sender: self)
+            println("completion left to right")
         })
         
         cell!.setSwipeGestureWithView(UIView(), color: UIColor.blueColor(), mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State3, completionBlock: { cell, state, mode in
-                println("upon completion right to left")
+            println("completion right to left")
         })
         
         if indexPath.section == 0 {
@@ -101,9 +102,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell!.detailTextLabel?.text = rockDescriptions[indexPath.row]
         }
         
-        
         return cell!
 
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("detailSegue", sender: self)
     }
 
     @IBAction func didPanMenu(sender: UIPanGestureRecognizer) {
@@ -124,15 +128,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             homeView.frame.origin.x = finalPositionX
         } else if (sender.state == UIGestureRecognizerState.Ended) {
             if (velocity.x > 0){
-                finalPositionX = 530
+                finalPositionX = 290
             } else {
                 finalPositionX = homeViewStartingX
             }
-            UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 30, options: nil, animations: { () -> Void in
+            UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: nil, animations: { () -> Void in
                 self.homeView.frame.origin.x = self.finalPositionX
                 }, completion: nil)
-            
-            
             
         }
         

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>10475C32-5413-4D96-983E-BDD070E3B4D7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AudiophileApp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E654FC74DC07CA9A7BAD4D2FBF0C2528475B3209</key>
+		<string>https://github.com/paulchong/AudiophileApp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>AudiophileApp.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E654FC74DC07CA9A7BAD4D2FBF0C2528475B3209</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/paulchong/AudiophileApp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E654FC74DC07CA9A7BAD4D2FBF0C2528475B3209</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E654FC74DC07CA9A7BAD4D2FBF0C2528475B3209</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AudiophileApp</string>
+		</dict>
+	</array>
+</dict>
+</plist>
